@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LifeCare — мобильная версия</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F4F4;--bg2:#fff;--t1:#111;--t2:#6D7885;--t3:#798BA5;--t4:#D4D4D4;--ac:#205EFF;--btn:#205EFF;--ok:#16A750;--okbg:#D6FFE6;--dg:#EB5757;--dgbg:#FFF1F1;--sec:#EAF1FD;--secp:#CADDFF;--ter:#EBEBEB;--line:#ECECEC;--on:#2DD06E;--off:#B9BDC9;--stage:#E3E6EC;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E0F12;--bg2:#1A1C21;--t1:#F2F3F5;--t2:#9AA4B2;--t3:#8393AD;--t4:#4A4F58;--ac:#6B93FF;--ok:#3DD17A;--okbg:#12301F;--dg:#FF7B7B;--dgbg:#3A1C1C;--sec:#1B2742;--secp:#2A3F6E;--ter:#2A2D33;--line:#2A2D33;--off:#4A4F5C;--stage:#050506;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E0F12;--bg2:#1A1C21;--t1:#F2F3F5;--t2:#9AA4B2;--t3:#8393AD;--t4:#4A4F58;--ac:#6B93FF;--ok:#3DD17A;--okbg:#12301F;--dg:#FF7B7B;--dgbg:#3A1C1C;--sec:#1B2742;--secp:#2A3F6E;--ter:#2A2D33;--line:#2A2D33;--off:#4A4F5C;--stage:#050506;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font:400 14px/20px "Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--t1);background:var(--stage);display:flex;align-items:center;justify-content:center}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.phone{width:390px;height:min(844px,100dvh);background:var(--bg);border-radius:36px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px var(--line)}
+@media(max-width:430px){.phone{width:100%;height:100dvh;border-radius:0;box-shadow:none}}
+.top{padding:20px 16px 4px;display:flex;flex-direction:column;gap:12px}
+.bar{display:flex;align-items:center;gap:8px}
+.bar b{flex:1;font:500 18px/24px inherit}
+.av{width:36px;height:36px;border-radius:50%;background:var(--sec);color:var(--ac);font-weight:500;font-size:16px}
+.av[aria-current=page]{box-shadow:0 0 0 2px var(--ac)}
+.th{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--t2);background:var(--bg2)}
+h1{font:500 26px/32px inherit}
+.sub{color:var(--t2);margin-top:2px}
+main{flex:1;overflow-y:auto;padding:12px 16px 20px;display:flex;flex-direction:column;gap:12px}
+.card{background:var(--bg2);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.row{display:flex;align-items:center;gap:12px}.grow{flex:1;min-width:0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+h2{font:500 16px/24px inherit}
+.mut{color:var(--t2)}.sm{font-size:13px;line-height:18px}.sec{color:var(--t3)}
+.big{font:500 26px/32px inherit}
+.ok{color:var(--ok)}.dg{color:var(--dg)}
+.hero{padding:20px;gap:14px}.hero.ok{background:var(--okbg)}.hero.no{background:var(--dgbg)}
+.hero h2{font-size:20px;line-height:24px}
+.dot{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;flex:none}
+.hero.ok .dot{background:var(--on)}.hero.no .dot{background:var(--dg)}
+.btn{background:var(--btn);color:#fff;border-radius:8px;padding:12px 20px;font-weight:500;width:100%;text-align:center}
+.btn:active{background:#2352C9}
+.btn.out{background:var(--bg2);color:var(--ac);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.out:active{background:var(--secp)}
+.btn.link{background:none;color:var(--t3);padding:8px;font-weight:400}
+.badge{border-radius:100px;padding:3px 10px;font-size:13px;line-height:18px;white-space:nowrap}
+.b-ok{background:var(--okbg);color:var(--ok)}.b-dg{background:var(--dgbg);color:var(--dg)}.b-ac{background:var(--sec);color:var(--ac)}.b-ter{background:var(--ter);color:var(--t3)}
+.bars{display:flex;align-items:flex-end;gap:3px;height:130px}
+.bars i{flex:1;border-radius:3px;background:var(--ac);min-height:4px}.bars i.x{background:var(--line)}
+.pair{flex:1;height:100%;display:flex;align-items:flex-end;gap:1px}.pair i{flex:1;border-radius:2px;background:var(--ac);min-height:3px}.pair i.h{background:var(--t4)}
+.axis{display:flex;justify-content:space-between;color:var(--t3);font-size:13px}
+.ev{display:flex;gap:12px}.ev time{width:44px;flex:none;color:var(--t3)}
+.seg{display:flex;gap:4px;padding:4px;background:var(--ter);border-radius:10px}
+.seg button,.chip{padding:8px;border-radius:8px;flex:1;color:var(--t2)}
+.seg button[aria-pressed=true]{background:var(--bg2);color:var(--t1)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{flex:none;border-radius:100px;padding:8px 12px;background:var(--bg2);font-size:13px}
+.chip[aria-pressed=true]{background:var(--btn);color:#fff}
+.leg{display:flex;gap:16px;color:var(--t2);font-size:13px}.leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.week{display:flex;gap:8px;align-items:flex-end;height:150px}
+.week div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;font-size:13px;height:100%}
+.week i{width:100%;border-radius:6px;background:var(--secp)}
+.pill{background:var(--bg);border-radius:8px;padding:10px 12px}
+.ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+.step{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.step:first-of-type{border-top:0}
+.mark{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none}
+.prog{height:8px;border-radius:4px;background:var(--line);overflow:hidden}.prog i{display:block;height:100%;width:36%;background:var(--ac)}
+.sig{display:flex;gap:6px;align-items:flex-end}.sig i{width:18px;border-radius:4px;background:var(--ac)}.sig i.x{background:var(--line)}
+.sw{width:51px;height:31px;border-radius:100px;background:var(--off);padding:2px;display:flex;flex:none;transition:background .15s}
+.sw::after{content:"";width:27px;height:27px;border-radius:50%;background:#fff;transition:transform .15s}
+.sw[aria-checked=true]{background:var(--on)}.sw[aria-checked=true]::after{transform:translateX(20px)}
+input[type=range]{width:100%;accent-color:var(--ac)}
+.field{display:flex;gap:12px;padding-top:10px;border-top:1px solid var(--line)}.field span:first-child{width:110px;flex:none;color:var(--t2)}
+nav{display:flex;background:var(--bg2);border-top:1px solid var(--line);padding:8px 8px calc(12px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;font-size:13px;line-height:18px;color:var(--t3)}
+nav button[aria-current=page]{color:var(--ac)}
+.i{flex:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="em" viewBox="0 0 76 76"><path fill="var(--btn)" fill-rule="evenodd" d="M 17.1875 0.0351562 C 14.816406 0.164062 12.488281 0.769531 10.308594 1.820312 C 8.492188 2.699219 6.941406 3.789062 5.492188 5.203125 C 4.5 6.175781 3.828125 6.980469 3.097656 8.0625 C 1.394531 10.59375 0.394531 13.382812 0.0703125 16.527344 C 0.00390625 17.175781 0 18.214844 0 38.039062 C 0 57.863281 0.00390625 58.902344 0.0703125 59.550781 C 0.464844 63.355469 1.855469 66.660156 4.300781 69.605469 C 4.71875 70.109375 5.957031 71.347656 6.457031 71.761719 C 8.042969 73.074219 9.691406 74.0625 11.496094 74.773438 C 12.925781 75.335938 14.097656 75.640625 15.875 75.917969 C 16.273438 75.976562 17.765625 75.984375 37.738281 75.996094 C 53.753906 76.007812 59.300781 75.996094 59.664062 75.964844 C 63.960938 75.566406 68.238281 73.441406 71.1875 70.234375 C 73.878906 67.308594 75.5 63.769531 75.945312 59.84375 C 76 59.351562 76.007812 57.226562 75.996094 37.804688 C 75.984375 17.453125 75.980469 16.289062 75.914062 15.84375 C 75.734375 14.640625 75.421875 13.324219 75.070312 12.304688 C 73.660156 8.226562 70.855469 4.777344 67.152344 2.570312 C 64.613281 1.054688 61.800781 0.203125 58.769531 0.0351562 C 57.957031 -0.0117188 18.035156 -0.0117188 17.1875 0.0351562 Z M 41.746094 9.660156 C 43.019531 9.773438 44.0625 9.933594 45.210938 10.1875 C 52.742188 11.855469 59.183594 16.746094 62.804688 23.546875 C 63.808594 25.429688 64.574219 27.425781 65.09375 29.492188 C 65.308594 30.347656 65.550781 31.542969 65.601562 32 L 65.628906 32.242188 L 60.554688 32.234375 L 55.484375 32.222656 L 55.355469 31.753906 C 54.605469 28.972656 53.238281 26.5625 51.261719 24.527344 C 47.171875 20.316406 41.167969 18.628906 35.441406 20.082031 C 34.03125 20.4375 32.394531 21.121094 31.144531 21.871094 L 30.660156 22.160156 L 30.648438 16.667969 C 30.644531 13.648438 30.648438 11.15625 30.65625 11.132812 C 30.695312 11.027344 32.644531 10.449219 33.839844 10.1875 C 35.34375 9.859375 36.445312 9.714844 38.382812 9.585938 C 38.871094 9.554688 41.132812 9.601562 41.746094 9.660156 Z M 23.089844 27.761719 C 23.089844 34.582031 23.101562 42.898438 23.117188 46.238281 L 23.144531 52.316406 L 36.941406 52.316406 L 36.933594 57.304688 L 36.921875 62.292969 L 13.152344 62.292969 L 13.140625 49.027344 C 13.125 35.242188 13.128906 34.824219 13.289062 33.253906 C 13.902344 27.222656 16.570312 21.613281 20.875 17.304688 C 21.65625 16.519531 22.960938 15.359375 23.058594 15.359375 C 23.078125 15.359375 23.089844 20.941406 23.089844 27.761719 Z M 65.617188 39.820312 C 65.617188 39.914062 65.398438 41.066406 65.28125 41.597656 C 63.933594 47.691406 60.457031 53.136719 55.5 56.910156 C 53.144531 58.703125 50.566406 60.0625 47.753906 60.980469 C 46.664062 61.339844 44.859375 61.804688 44.570312 61.804688 C 44.492188 61.804688 44.492188 61.792969 44.492188 56.675781 L 44.492188 51.546875 L 44.910156 51.398438 C 48.957031 49.96875 52.265625 47.0625 54.171875 43.261719 C 54.59375 42.425781 55.078125 41.136719 55.328125 40.207031 L 55.441406 39.789062 L 60.527344 39.789062 C 63.328125 39.789062 65.617188 39.800781 65.617188 39.820312 Z"/></symbol></svg>
+<div class="phone">
+  <header class="top">
+    <div class="bar"><svg width="28" height="28"><use href="#em"/></svg><b>LifeCare</b><button class="th" id="thBtn" aria-label="Сменить тему"></button><button class="av" id="avBtn" data-a="go" data-v="prof" aria-label="Профиль и настройки">М</button></div>
+    <div><h1 id="ttl"></h1><p class="sub" id="sub"></p></div>
+  </header>
+  <main id="view"></main>
+  <nav id="tabs" aria-label="Разделы"></nav>
+</div>
+<script>
+const P={home:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',act:'<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',notes:'<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>',dev:'<circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>',check:'<polyline points="20 6 9 17 4 12"/>',alert:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',clock:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',info:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',plus:'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',moon:'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',sun:'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'};
+const I=(n,s=20)=>`<svg class="i" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+const S={tab:'home',ok:true,seg:'day',flt:'all',tg:{dev:1,abs:1,conn:1,week:0}};
+const today=[2,1,1,1,1,2,6,18,35,48,40,30,22,38,55,50,42,36,30,22,14,8,4,2],habit=[2,1,1,1,1,3,8,20,34,44,42,34,26,36,48,50,44,38,32,24,16,10,5,2];
+const bars=(n)=>`<div class="bars">${today.map((v,i)=>`<i class="${i>n?'x':''}" style="height:${i>n?3:v/60*100}%"></i>`).join('')}</div><div class="axis"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>`;
+const T={home:['Главная','Всё ли в порядке?'],act:['Активность','Как прошёл день?'],notes:['Уведомления','На что обратить внимание?'],dev:['Устройство','Устройство и настройка'],prof:['Профиль','Профиль и настройки']};
+const N=[['Длительное отсутствие активности','Высокий','b-dg','dg','alert','high','За установленный период (4 часа) активность не обнаружена.','Вчера, 14:10','Позвоните Анне Петровне и убедитесь, что всё в порядке.','Позвонить','Всё в порядке'],
+['Активность ниже обычной','Предупреждение','b-ter','dg','act','high','Пятница: 70% от привычного уровня активности для этого дня.','Пт, 18:00','Откройте сводку дня и сравните с привычным режимом.','Открыть сводку'],
+['Устройство потеряло связь','Технический','b-ac','ac','dev','tech','Устройство не передаёт данные с 14:30.','Сегодня, 14:35','Проверьте питание модуля, Wi-Fi и соединение.','Проверить устройство'],
+['Нестабильные данные','Технический','b-ac','ac','dev','tech','Качество сигнала недостаточно для надёжной оценки активности.','Сб, 09:20','Проверьте размещение модуля относительно роутера.','Подсказки по размещению'],
+['Недельная сводка','Информационный','b-ter','t3','info','info','Активность за неделю отличалась от привычной в два дня.','Пн, 09:00','Просмотрите динамику по дням.','Открыть неделю']];
+const tgl=(k,l,d)=>`<div class="row"><div class="grow"><div>${l}</div><div class="mut sm">${d}</div></div><button class="sw" role="switch" aria-checked="${!!S.tg[k]}" aria-label="${l}" data-a="tg" data-v="${k}"></button></div>`;
+const V={
+home(){const o=S.ok;return `<section class="card hero ${o?'ok':'no'}"><div class="row"><span class="dot">${I(o?'check':'alert',24)}</span><h2 class="grow ${o?'ok':'dg'}">${o?'Всё в порядке':'Нет актуальных данных'}</h2></div><p>${o?'Активность в пределах привычного режима. Последнее движение зафиксировано в 18:31.':'Устройство не передаёт данные с 14:30, поэтому мы не можем оценить состояние. Позвоните Анне Петровне и проверьте устройство.'}</p><button class="btn" data-a="go" data-v="${o?'act':'dev'}">${o?'Посмотреть день':'Проверить устройство'}</button></section>
+<div class="g2"><div class="card" style="gap:4px"><span class="mut sm">Устройство</span><span class="big ${o?'ok':'dg'}">${o?'В сети':'Не в сети'}</span><span class="sec sm">${o?'Сигнал хороший':'Нет данных с 14:30'}</span></div><div class="card" style="gap:4px"><span class="mut sm">Активность</span><span class="big ${o?'':'sec'}">${o?'92%':'—'}</span><span class="sec sm">${o?'от привычной':'Оценка недоступна'}</span></div></div>
+<div class="card row"><div class="grow"><div class="mut sm">Предупреждения</div><div class="${o?'':'dg'}">${o?'Активных нет':'Потеря связи с устройством'}</div></div><span class="big ${o?'':'dg'}">${o?0:1}</span></div>
+<section class="card"><div class="row"><div class="grow"><h2>Активность сегодня</h2><div class="mut sm">${o?'Сравнение с привычным режимом':'Данные только до 14:30'}</div></div><span class="badge ${o?'b-ok':'b-dg'}">${o?'В норме':'Устарели'}</span></div>${bars(o?18:14)}</section>
+<section class="card"><h2>Последние события</h2>${(o?[['18:31','Зафиксировано движение'],['16:05','Активность выше обычной'],['12:40','Период низкой активности — 1 ч 10 мин'],['08:15','Начало дневной активности']]:[['14:30','Устройство перестало передавать данные'],['14:22','Последнее движение зафиксировано'],['12:40','Период низкой активности — 1 ч 10 мин'],['08:15','Начало дневной активности']]).map(([t,s],i)=>`<div class="ev"><time class="${!o&&!i?'dg':''}">${t}</time><span>${s}</span></div>`).join('')}</section>
+<button class="btn link sm" data-a="demo">Демо: переключить состояние</button>`},
+act(){const d=S.seg==='day';return `<div class="seg" role="group" aria-label="Период"><button data-a="seg" data-v="day" aria-pressed="${d}">День</button><button data-a="seg" data-v="week" aria-pressed="${!d}">Неделя</button></div>`+(d?`<section class="card"><h2>Активность по часам</h2><div class="leg"><span><i style="background:var(--ac)"></i>Сегодня</span><span><i style="background:var(--t4)"></i>Привычный режим</span></div><div class="bars" style="height:160px">${today.map((v,i)=>`<div class="pair"><i class="${i>18?'x':''}" style="height:${i>18?2:v/60*100}%"></i><i class="h" style="height:${habit[i]/60*100}%"></i></div>`).join('')}</div><div class="axis"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div></section>
+<section class="card"><h2>Периоды низкой активности</h2><div class="pill"><div>12:40 – 13:50 · 1 ч 10 мин</div><div class="mut sm">Чуть длиннее обычного</div></div><div class="pill"><div>02:00 – 06:00 · ночь</div><div class="mut sm">В пределах привычного</div></div><p class="ok">Итог дня: 92% от привычной активности</p></section>`:`<section class="card"><div><h2>Динамика за неделю</h2><div class="mut sm">Доля от привычной активности по дням</div></div><div class="week">${[['Пн',96],['Вт',101],['Ср',88],['Чт',93],['Пт',70],['Сб',92],['Вс',92]].map(([d,v])=>`<div><span class="${v<75?'dg':''}">${v}%</span><i style="height:${v*.8}px;${v<75?'background:var(--dg)':d==='Вс'?'background:var(--ac)':''}"></i><span class="sec">${d}</span></div>`).join('')}</div></section>`)},
+notes(){const c={all:5,high:2,tech:2,info:1},l={all:'Все',high:'Важные',tech:'Технические',info:'Сводки'};return `<div class="chips">${Object.keys(l).map(k=>`<button class="chip" data-a="flt" data-v="${k}" aria-pressed="${S.flt===k}">${l[k]} · ${c[k]}</button>`).join('')}</div>`+N.filter(n=>S.flt==='all'||n[5]===S.flt).map((n,i)=>`<article class="card"><div class="row" style="align-items:flex-start"><span class="ic ${n[2]}" style="color:var(--${n[3]})">${I(n[4],22)}</span><div class="grow"><h2>${n[0]}</h2><div class="row" style="gap:8px;margin-top:4px"><span class="badge ${n[2]}">${n[1]}</span><span class="sec sm">${n[7]}</span></div></div></div><p>Причина: ${n[6]}</p><p class="mut">Что сделать: ${n[8]}</p><div class="row"><button class="btn" data-a="go" data-v="${n[5]==='tech'?'dev':'act'}">${n[9]}</button>${n[10]?`<button class="btn out">${n[10]}</button>`:''}</div></article>`).join('')},
+dev(){const st=[['Питание модуля','Подключено по USB-C'],['Подключение к Wi-Fi 2,4 ГГц','Сеть: Home-2.4G'],['Передача данных','Последний пакет получен 2 мин назад'],['Качество сигнала','Достаточное для оценки активности']];return `<section class="card"><div class="row"><div class="grow"><h2>Статус подключения</h2><div class="mut sm">Проверка выполняется автоматически</div></div><span class="badge b-ok">В сети</span></div><div>${st.map(s=>`<div class="step"><span class="mark b-ok">${I('check',14)}</span><div><div>${s[0]}</div><div class="mut sm">${s[1]}</div></div></div>`).join('')}<div class="step"><span class="mark b-ac">${I('clock',14)}</span><div><div>Калибровка</div><div class="mut sm">Идёт формирование профиля привычной активности</div></div></div></div><div class="row mut"><span class="grow">Профиль активности</span><span style="color:var(--t1)">День 5 из ~14</span></div><div class="prog" role="progressbar" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100"><i></i></div><p class="sec sm">До завершения калибровки уведомления об отклонениях не отправляются — только сводки и технические уведомления. Срок в 14 дней — проверяемая гипотеза.</p></section>
+<section class="card"><div class="row"><h2 class="grow">Качество сигнала</h2><span class="badge b-ok">Хорошее</span></div><div class="sig"><i style="height:14px"></i><i style="height:23px"></i><i style="height:32px"></i><i style="height:41px"></i><i class="x" style="height:50px"></i></div><p class="mut sm">Модуль стабильно получает данные от роутера. Обрывы связи за последние 24 часа: 0.</p></section>
+<section class="card"><h2>Размещение модуля</h2><p>Поставьте модуль в комнате, где человек проводит больше всего времени.</p><p>Держите его вдали от металлических поверхностей и микроволновки.</p><p>Не переставляйте модуль после калибровки — иначе потребуется повторная.</p></section>
+<section class="card"><h2>Если устройство не подключается</h2><div class="pill"><div>Включите 2,4 ГГц</div><div class="mut sm">Модуль работает только в диапазоне 2,4 ГГц. Если сети объединены под одним именем, выделите отдельную.</div></div><div class="pill"><div>Проверьте защиту сети</div><div class="mut sm">Для первых тестов рекомендуем WPA2-Personal.</div></div><div class="pill"><div>Проверьте питание</div><div class="mut sm">Убедитесь, что кабель USB-C надёжно подключён к блоку питания.</div></div></section>`},
+prof(){const sl=(l,v,m,x,u)=>`<label class="card" style="padding:0;background:none;gap:6px"><span class="row"><span class="grow">${l}</span><output class="${'ok'===0?'':''}" style="color:var(--ac)">${v}${u}</output></span><input type="range" min="${m}" max="${x}" value="${v}" data-u="${u}"></label>`;return `<section class="card"><h2>Подопечный</h2><div class="row"><span class="av" style="display:grid;place-items:center;width:48px;height:48px">А</span><div><div>Анна Петровна</div><div class="mut sm">Проживает одна</div></div></div><div class="field"><span>Домашний Wi-Fi</span><span>Home-2.4G</span></div><div class="field"><span>Модуль</span><span>LifeCare ESP32-S3</span></div><div class="field"><span>Заметки</span><span>Лекарства и медицинские данные — в следующих версиях</span></div></section>
+<section class="card"><h2>Контакты родственников</h2><div class="pill row"><span class="av" style="display:grid;place-items:center">М</span><div class="grow"><div>Мария</div><div class="mut sm">Дочь · основной контакт</div></div></div><div class="pill row"><span class="av" style="display:grid;place-items:center">С</span><div class="grow"><div>Сергей</div><div class="mut sm">Сын</div></div></div><button class="btn out" style="display:flex;gap:8px;justify-content:center;align-items:center">${I('plus',16)}Добавить контакт</button></section>
+<section class="card"><h2>Какие уведомления получать</h2>${tgl('dev','Отклонение от привычного режима','Сегодня активность ниже обычной')}${tgl('abs','Длительное отсутствие активности','Высокий приоритет')}${tgl('conn','Потеря связи с устройством','Технические')}${tgl('week','Недельная сводка','По понедельникам в 09:00')}</section>
+<section class="card"><h2>Пороговые значения</h2>${sl('Период без активности до предупреждения',4,1,12,' ч')}<label class="card" style="padding:0;background:none;gap:6px"><span class="row"><span class="grow">Чувствительность к отклонениям</span><output style="color:var(--ac)">Средняя</output></span><input type="range" min="1" max="3" value="2" data-names="Низкая,Средняя,Высокая"></label></section>
+<section class="card"><h2>Доступ к данным</h2><div class="row"><span class="grow">Мария</span><span class="badge b-ter">Владелец</span></div><div class="row"><span class="grow">Сергей</span><span class="badge b-ter">Только просмотр</span></div><p class="sec sm">Данные видят только приглашённые родственники. Владелец может отозвать доступ в любой момент.</p></section>`}};
+function render(){const t=S.tab;document.getElementById('ttl').textContent=T[t][1];document.getElementById('sub').textContent=t==='home'?'Анна Петровна · обновлено сегодня в '+(S.ok?'18:42':'14:30'):t==='act'?'Анна Петровна · воскресенье, 18 октября':'Анна Петровна';const v=document.getElementById('view');v.innerHTML=V[t]();v.scrollTop=0;
+document.getElementById('tabs').innerHTML=['home','act','notes','dev'].map(k=>`<button data-a="go" data-v="${k}" ${k===t?'aria-current="page"':''}>${I(k,24)}${T[k][0]}</button>`).join('');
+document.getElementById('avBtn').toggleAttribute('aria-current',t==='prof');if(t==='prof')document.getElementById('avBtn').setAttribute('aria-current','page');}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=b.dataset.v,keep=document.getElementById('view').scrollTop;
+if(a==='go')S.tab=v;else if(a==='seg')S.seg=v;else if(a==='flt')S.flt=v;else if(a==='tg')S.tg[v]=S.tg[v]?0:1;else if(a==='demo')S.ok=!S.ok;
+render();if(a!=='go')document.getElementById('view').scrollTop=keep;});
+document.addEventListener('input',e=>{const r=e.target;if(r.type!=='range')return;const o=r.parentNode.querySelector('output');o.textContent=r.dataset.names?r.dataset.names.split(',')[r.value-1]:r.value+(r.dataset.u||'');});
+const root=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');
+const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':mq.matches;
+function paintTh(){const d=isDark(),b=document.getElementById('thBtn');b.innerHTML=I(d?'sun':'moon',20);b.setAttribute('aria-label',d?'Включить светлую тему':'Включить тёмную тему');}
+try{const s=localStorage.getItem('lc-theme');if(s)root.dataset.theme=s;}catch(e){}
+document.getElementById('thBtn').addEventListener('click',()=>{const n=isDark()?'light':'dark';root.dataset.theme=n;try{localStorage.setItem('lc-theme',n)}catch(e){}paintTh();});
+mq.addEventListener('change',paintTh);
+paintTh();render();
+</script>
+</body>
+</html>
